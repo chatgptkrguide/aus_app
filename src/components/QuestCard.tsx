@@ -92,7 +92,7 @@ export default function QuestCard({
               className="inline-block text-sm text-blue-500 hover:text-blue-700 mt-2 transition-colors"
               onClick={(e) => e.stopPropagation()}
             >
-              Guide &rarr;
+              가이드 보기 &rarr;
             </a>
           )}
         </div>

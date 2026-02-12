@@ -21,7 +21,7 @@ export default function Header({
           className="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 transition-colors mb-3"
         >
           <span>&larr;</span>
-          <span>Home</span>
+          <span>홈</span>
         </Link>
       )}
       <h1 className="text-2xl font-bold text-gray-900">{title}</h1>

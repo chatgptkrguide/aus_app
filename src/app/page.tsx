@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { stages } from "@/data/quests";
+import { stages, getTotalQuestCount } from "@/data/quests";
 import { useProgress } from "@/hooks/useProgress";
+import CompletionStats from "@/components/CompletionStats";
+import AirplaneTakeoff from "@/components/AirplaneTakeoff";
 
 export default function Home(): React.ReactElement {
   const { progress, getStageProgress, getTotalProgress } = useProgress();
@@ -99,7 +101,7 @@ export default function Home(): React.ReactElement {
                     <div
                       className={`glass-card w-full p-5 transition-all ${
                         isCurrent
-                          ? "ring-2 ring-blue-400 animate-pulse"
+                          ? "ring-2 ring-blue-400 ring-offset-2"
                           : completed
                             ? "opacity-75"
                             : ""
@@ -112,6 +114,11 @@ export default function Home(): React.ReactElement {
                             <h2 className="text-lg font-bold text-slate-800">
                               Stage {stage.id}: {stage.title}
                             </h2>
+                            {isCurrent && (
+                              <span className="text-xs font-semibold text-blue-500">
+                                현재 단계 &rarr;
+                              </span>
+                            )}
                             {completed && (
                               <span className="check-animate text-green-500">
                                 ✅
@@ -185,6 +192,15 @@ export default function Home(): React.ReactElement {
           </section>
         )}
 
+        {/* Completion Stats */}
+        <section className="mt-8">
+          <CompletionStats
+            startedAt={progress.startedAt}
+            completedCount={progress.completedQuests.length}
+            totalCount={getTotalQuestCount()}
+          />
+        </section>
+
         {totalProgress === 100 && (
           <section className="glass-card mt-8 p-5 text-center">
             <p className="text-2xl">🎉🇦🇺</p>
@@ -196,6 +212,8 @@ export default function Home(): React.ReactElement {
             </p>
           </section>
         )}
+
+        <AirplaneTakeoff show={totalProgress === 100} />
 
         {/* Footer spacing */}
         <div className="h-8" />
