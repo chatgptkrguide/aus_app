@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+  --font-sans: var(--font-noto-sans-kr), "Noto Sans KR", sans-serif;
+  --color-sky-start: #e0f2fe;
+  --color-sky-end: #bae6fd;
+  --color-quest-pending: #f1f5f9;
+  --color-quest-done: #dcfce7;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Sky gradient background */
+body {
+  background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 50%, #f0f9ff 100%);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+/* Cloud float animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-8px) translateX(4px);
+  }
+  50% {
+    transform: translateY(-4px) translateX(-4px);
+  }
+  75% {
+    transform: translateY(-10px) translateX(2px);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.cloud-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.cloud-float-slow {
+  animation: float 8s ease-in-out infinite;
+}
+
+.cloud-float-fast {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Glass card effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Checkmark animation */
+@keyframes checkmark {
+  0% {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.check-animate {
+  animation: checkmark 0.4s ease-out forwards;
+}
+
+/* Progress bar animation */
+@keyframes progress-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--progress-width, 0%);
+  }
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #38bdf8, #2563eb);
+  border-radius: 9999px;
+  height: 100%;
+  animation: progress-fill 0.8s ease-out forwards;
+}
+
+.progress-track {
+  background: #e2e8f0;
+  border-radius: 9999px;
+  height: 8px;
+  overflow: hidden;
+}
+
+/* Airplane fly animation */
+@keyframes fly {
+  0% {
+    transform: translateX(-100%) translateY(0) rotate(-5deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(50%) translateY(-20px) rotate(0deg);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200%) translateY(-10px) rotate(5deg);
+    opacity: 0;
+  }
+}
+
+.fly-animate {
+  animation: fly 3s ease-in-out forwards;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #93c5fd;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #60a5fa;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #93c5fd transparent;
 }
