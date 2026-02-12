@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { stages } from "@/data/quests";
@@ -12,11 +12,14 @@ import XPPopup from "@/components/XPPopup";
 import Confetti from "@/components/Confetti";
 
 export default function StagePage(): React.ReactElement {
+  const [mounted, setMounted] = useState(false);
   const params = useParams();
   const stageId = Number(params.id);
   const stage = stages.find((s) => s.id === stageId);
   const [showXP, setShowXP] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   const {
     completeQuest,
@@ -24,6 +27,8 @@ export default function StagePage(): React.ReactElement {
     isQuestCompleted,
     getStageProgress,
   } = useProgress();
+
+  if (!mounted) return <div className="min-h-screen" />;
 
   if (!stage) {
     return (
@@ -60,7 +65,7 @@ export default function StagePage(): React.ReactElement {
   const isStageComplete = completedCount === stage.quests.length;
   const nextStage = stages.find((s) => s.id === stageId + 1);
 
-  const handleToggle = useCallback((questId: string): void => {
+  const handleToggle = (questId: string): void => {
     if (isQuestCompleted(questId)) {
       uncompleteQuest(questId);
     } else {
@@ -76,7 +81,7 @@ export default function StagePage(): React.ReactElement {
         }, 500);
       }
     }
-  }, [completeQuest, uncompleteQuest, isQuestCompleted, completedCount, stage.quests.length]);
+  };
 
   return (
     <div className="min-h-screen p-4 pb-20">

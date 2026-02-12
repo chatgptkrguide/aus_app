@@ -1,14 +1,22 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { stages, getTotalQuestCount } from "@/data/quests";
 import { useProgress } from "@/hooks/useProgress";
+import { useDeparture } from "@/hooks/useDeparture";
 import CompletionStats from "@/components/CompletionStats";
 import AirplaneTakeoff from "@/components/AirplaneTakeoff";
 
 export default function Home(): React.ReactElement {
+  const [mounted, setMounted] = useState(false);
   const { progress, getStageProgress, getTotalProgress } = useProgress();
+  const { daysUntilDeparture } = useDeparture();
   const totalProgress = getTotalProgress();
+
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return <div className="min-h-screen" />;
 
   const isStageUnlocked = (stageId: number): boolean => {
     if (stageId === 1) return true;
@@ -53,6 +61,11 @@ export default function Home(): React.ReactElement {
           <p className="mt-2 text-sm text-slate-600">
             워킹홀리데이 준비, 게임처럼 클리어하자! 🎮
           </p>
+          {daysUntilDeparture !== null && daysUntilDeparture >= 0 && (
+            <span className="mt-2 inline-block rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
+              ✈️ 출발까지 D-{daysUntilDeparture}
+            </span>
+          )}
 
           {/* Progress bar with airplane */}
           <div className="mt-6">
@@ -65,7 +78,7 @@ export default function Home(): React.ReactElement {
               />
               <span
                 className="absolute top-1/2 -translate-y-1/2 text-lg transition-all duration-700 ease-out"
-                style={{ left: `${totalProgress}%` }}
+                style={{ left: `${Math.min(Math.max(totalProgress, 5), 95)}%` }}
               >
                 ✈️
               </span>

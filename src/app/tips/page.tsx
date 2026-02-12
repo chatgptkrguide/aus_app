@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface TipItem {
   id: string;
@@ -14,6 +14,12 @@ interface TipCategory {
   emoji: string;
   tips: TipItem[];
 }
+
+const CATEGORY_BG: Record<string, string> = {
+  arrival: "bg-blue-50/50",
+  job: "bg-purple-50/50",
+  life: "bg-amber-50/50",
+};
 
 const TIP_CATEGORIES: TipCategory[] = [
   {
@@ -145,7 +151,7 @@ function TipAccordion({ tip }: { tip: TipItem }): React.ReactElement {
         <div className="flex-1">
           <p className="text-sm font-medium text-slate-700">{tip.text}</p>
           {isOpen && tip.detail && (
-            <p className="mt-2 text-xs leading-relaxed text-slate-500">
+            <p className="mt-2 text-sm leading-relaxed text-slate-500">
               {tip.detail}
             </p>
           )}
@@ -156,6 +162,12 @@ function TipAccordion({ tip }: { tip: TipItem }): React.ReactElement {
 }
 
 export default function TipsPage(): React.ReactElement {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return <div className="min-h-screen" />;
+
   return (
     <div className="relative min-h-screen px-4 py-8">
       {/* Cloud decorations */}
@@ -178,8 +190,13 @@ export default function TipsPage(): React.ReactElement {
 
         <div className="flex flex-col gap-6">
           {TIP_CATEGORIES.map((category) => (
-            <section key={category.id} className="glass-card p-5">
-              <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
+            <section
+              key={category.id}
+              className="glass-card p-5 hover:shadow-md transition-shadow"
+            >
+              <h2
+                className={`mb-3 flex items-center gap-2 text-lg font-bold text-slate-800 -mx-5 -mt-5 px-5 pt-5 pb-3 rounded-t-2xl ${CATEGORY_BG[category.id] ?? ""}`}
+              >
                 <span>{category.emoji}</span>
                 {category.title}
               </h2>
