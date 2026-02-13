@@ -15,10 +15,16 @@ export const metadata: Metadata = {
   description:
     "게임처럼 재미있게! 호주 워킹홀리데이 비자 신청부터 출발까지 단계별 가이드",
   manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "워홀메이트",
+  },
 };
 
 export const viewport: Viewport = {
   themeColor: "#3b82f6",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -28,9 +34,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+      </head>
       <body className={`${notoSansKR.variable} pb-20 antialiased`}>
         {children}
         <BottomNav />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                  navigator.serviceWorker.register('/sw.js');
+                });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   );
