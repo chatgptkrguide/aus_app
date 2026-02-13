@@ -211,13 +211,13 @@ export default function StagePage(): React.ReactElement {
       {/* Back button - floating */}
       <button
         onClick={() => router.push("/")}
-        className="fixed top-0 left-0 z-50 pt-[env(safe-area-inset-top,0px)]"
+        className="fixed top-0 left-0 z-40 pt-[env(safe-area-inset-top,0px)]"
       >
         <div className="pt-4 pl-4">
-          <div className="flex items-center gap-1 text-gray-400 hover:text-gray-600 transition-colors">
+          <div className="min-h-[44px] min-w-[44px] flex items-center gap-1 text-gray-400 hover:text-gray-600 transition-colors">
             <svg
-              width="20"
-              height="20"
+              width="24"
+              height="24"
               viewBox="0 0 20 20"
               fill="none"
             >

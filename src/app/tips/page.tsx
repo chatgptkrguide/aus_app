@@ -146,7 +146,7 @@ function TipAccordion({ tip }: { tip: TipItem }): React.ReactElement {
       aria-expanded={isOpen}
       aria-controls={`tip-detail-${tip.id}`}
     >
-      <div className="flex items-start gap-2 py-2">
+      <div className="flex items-start gap-2 py-3">
         <span className={`mt-0.5 text-xs transition-transform duration-200 ${isOpen ? "rotate-90" : ""}`}>
           ▶
         </span>
@@ -215,7 +215,7 @@ export default function TipsPage(): React.ReactElement {
         </div>
 
         {/* Footer spacing for bottom nav */}
-        <div className="h-8" />
+        <div className="h-20" />
       </main>
     </div>
   );

@@ -55,7 +55,7 @@ export default function RootLayout({
       <head>
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
-      <body className={`${notoSansKR.variable} pb-20 antialiased`}>
+      <body className={`${notoSansKR.variable} antialiased`}>
         {children}
         <BottomNav />
         <script

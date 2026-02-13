@@ -169,6 +169,8 @@ body {
 .confetti-piece {
   animation: confetti-fall var(--fall-duration, 3s) ease-in forwards;
   animation-delay: var(--fall-delay, 0s);
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /* Airplane takeoff */

@@ -50,11 +50,11 @@ export default function LevelBadge({
       {/* XP progress bar (thin) */}
       <div className="mt-2">
         <div className="flex justify-between items-center mb-1">
-          <span className="text-[10px] text-slate-500 font-medium">
+          <span className="text-xs text-slate-500 font-medium">
             {totalXP} XP
           </span>
           {nextRank && (
-            <span className="text-[10px] text-slate-400">
+            <span className="text-xs text-slate-400">
               다음까지 {xpToNextLevel} XP
             </span>
           )}
@@ -69,12 +69,12 @@ export default function LevelBadge({
 
       {/* Next rank hint */}
       {nextRank && (
-        <p className="text-[10px] text-slate-400 mt-1.5">
+        <p className="text-xs text-slate-400 mt-1.5">
           다음: {nextRank.emoji} {nextRank.title}까지 {xpToNextLevel} XP
         </p>
       )}
       {!nextRank && (
-        <p className="text-[10px] text-amber-500 font-semibold mt-1.5">
+        <p className="text-xs text-amber-500 font-semibold mt-1.5">
           최고 랭크 달성!
         </p>
       )}

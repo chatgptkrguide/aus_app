@@ -186,10 +186,10 @@ export default function QuestSlide({
 
           {/* Swipe hint - first card only */}
           {isFirst && !isCompleted && (
-            <div className="swipe-hint flex flex-col items-center mt-4 text-gray-300">
+            <div className="swipe-hint flex flex-col items-center mt-4 text-slate-400">
               <svg
-                width="20"
-                height="20"
+                width="24"
+                height="24"
                 viewBox="0 0 20 20"
                 fill="none"
                 className="mb-0.5"
@@ -202,7 +202,7 @@ export default function QuestSlide({
                   strokeLinejoin="round"
                 />
               </svg>
-              <span className="text-xs">스와이프</span>
+              <span className="text-xs">위로 스와이프</span>
             </div>
           )}
         </div>

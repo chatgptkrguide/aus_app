@@ -30,7 +30,7 @@ export default function XPPopup({
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-50 flex items-center justify-center">
+    <div className="fixed inset-0 pointer-events-none z-[45] flex items-center justify-center">
       {/* Level up screen glow */}
       {levelUp && (
         <div className="level-glow absolute inset-0 bg-gradient-to-b from-amber-300 via-yellow-200 to-transparent" />

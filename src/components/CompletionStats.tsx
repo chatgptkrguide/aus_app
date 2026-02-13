@@ -42,25 +42,25 @@ export default function CompletionStats({
           <p className="text-lg font-bold text-sky-700">
             {days === 0 ? "D+0" : `D+${days}`}
           </p>
-          <p className="text-[10px] text-slate-500">준비 기간</p>
+          <p className="text-xs text-slate-500">준비 기간</p>
         </div>
         <div>
           <p className="text-lg font-bold text-emerald-600">
             {completedCount}/{totalCount}
           </p>
-          <p className="text-[10px] text-slate-500">완료 퀘스트</p>
+          <p className="text-xs text-slate-500">완료 퀘스트</p>
         </div>
         <div>
           <p className="text-lg font-bold text-purple-600">
             {unlockedAchievementCount ?? 0}/{totalAchievementCount ?? 6}
           </p>
-          <p className="text-[10px] text-slate-500">업적</p>
+          <p className="text-xs text-slate-500">업적</p>
         </div>
       </div>
 
       {/* Milestone - single line */}
       {nextMilestone !== null && (
-        <p className="text-[10px] text-slate-500 text-center mt-2 pt-2 border-t border-slate-100">
+        <p className="text-xs text-slate-500 text-center mt-2 pt-2 border-t border-slate-100">
           🎯 다음 마일스톤까지{" "}
           <span className="font-bold text-amber-600">
             {nextMilestone - completedCount}개
@@ -69,7 +69,7 @@ export default function CompletionStats({
         </p>
       )}
       {nextMilestone === null && completedCount > 0 && (
-        <p className="text-[10px] font-medium text-emerald-600 text-center mt-2 pt-2 border-t border-slate-100">
+        <p className="text-xs font-medium text-emerald-600 text-center mt-2 pt-2 border-t border-slate-100">
           🎉 모든 마일스톤 달성!
         </p>
       )}

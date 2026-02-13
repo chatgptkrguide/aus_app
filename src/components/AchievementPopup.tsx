@@ -34,7 +34,7 @@ export default function AchievementPopup({
   if (!achievement) return null;
 
   return (
-    <div className="fixed inset-x-0 top-0 z-50 pointer-events-none flex justify-center px-4 pt-4">
+    <div className="fixed inset-x-0 top-0 z-[46] pointer-events-none flex justify-center px-4" style={{ paddingTop: "max(1rem, env(safe-area-inset-top))" }}>
       <div
         className={`pointer-events-auto max-w-sm w-full achievement-card p-4 flex items-center gap-3 transition-all duration-400 ${
           visible
@@ -47,7 +47,7 @@ export default function AchievementPopup({
 
         {/* Info */}
         <div className="flex-1 min-w-0">
-          <p className="text-[10px] font-semibold text-amber-500 uppercase tracking-wider">
+          <p className="text-xs font-semibold text-amber-500 uppercase tracking-wider">
             업적 달성!
           </p>
           <p className="font-bold text-slate-800 text-sm">

@@ -67,9 +67,9 @@ export default function Home(): React.ReactElement {
     return (
       <div className="min-h-screen px-4 py-8">
         <div className="mx-auto max-w-md space-y-4">
-          <div className="h-16 rounded-2xl bg-slate-200/50 animate-pulse" />
-          <div className="h-64 rounded-2xl bg-slate-200/50 animate-pulse" />
           <div className="h-24 rounded-2xl bg-slate-200/50 animate-pulse" />
+          <div className="h-56 rounded-2xl bg-slate-200/50 animate-pulse" />
+          <div className="h-32 rounded-2xl bg-slate-200/50 animate-pulse" />
           <div className="h-20 rounded-2xl bg-slate-200/50 animate-pulse" />
         </div>
       </div>
@@ -165,7 +165,7 @@ export default function Home(): React.ReactElement {
               {/* Stage tag */}
               <p className="text-center mt-3">
                 <span
-                  className="inline-block rounded-full px-3 py-0.5 text-[10px] font-semibold"
+                  className="inline-block rounded-full px-3 py-0.5 text-xs font-semibold"
                   style={{
                     backgroundColor: `${currentQuestInfo.stage.color}15`,
                     color: currentQuestInfo.stage.color,
@@ -187,7 +187,7 @@ export default function Home(): React.ReactElement {
         ) : null}
 
         {/* Journey Map - Stage Minimap */}
-        <section className="mb-5">
+        <section className="mb-5 overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <p className="text-xs font-semibold text-slate-500 ml-1">
               여정 현황
@@ -242,10 +242,10 @@ export default function Home(): React.ReactElement {
                         <span className="text-2xl block">
                           {stage.emoji}
                         </span>
-                        <p className="text-[10px] font-bold mt-1 text-slate-700">
+                        <p className="text-xs font-bold mt-1 text-slate-700">
                           Stage {stage.id}
                         </p>
-                        <p className="text-[9px] text-slate-500">
+                        <p className="text-xs text-slate-500">
                           {completedCount}/{stage.quests.length}
                         </p>
                         <div className="h-1 bg-slate-200 rounded-full mt-1.5 overflow-hidden">
@@ -264,10 +264,10 @@ export default function Home(): React.ReactElement {
                   ) : (
                     <div className="flex-shrink-0 w-20 glass-card p-3 text-center opacity-50 cursor-not-allowed">
                       <span className="text-2xl block">🔒</span>
-                      <p className="text-[10px] font-bold mt-1 text-slate-400">
+                      <p className="text-xs font-bold mt-1 text-slate-400">
                         Stage {stage.id}
                       </p>
-                      <p className="text-[9px] text-slate-400">
+                      <p className="text-xs text-slate-400">
                         0/{stage.quests.length}
                       </p>
                       <div className="h-1 bg-slate-200 rounded-full mt-1.5" />
@@ -302,7 +302,7 @@ export default function Home(): React.ReactElement {
         <AirplaneTakeoff show={allComplete} />
 
         {/* Footer spacing for BottomNav */}
-        <div className="h-8" />
+        <div className="h-20" />
       </main>
 
     </div>

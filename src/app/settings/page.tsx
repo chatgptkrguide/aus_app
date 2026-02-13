@@ -65,7 +65,7 @@ export default function SettingsPage(): React.ReactElement {
             aria-label="출발 예정일 선택"
             value={departureDate ?? ""}
             onChange={(e) => setDepartureDate(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white/80 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 mb-3"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/80 text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 mb-3"
           />
           <p
             className={`text-center font-bold text-lg ${

@@ -41,7 +41,7 @@ export default function BottomNav(): React.ReactElement | null {
                 <Link
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  className={`flex flex-col items-center gap-0.5 px-5 py-1.5 rounded-xl transition-all ${
+                  className={`flex flex-col items-center gap-0.5 px-5 py-2.5 rounded-xl transition-all ${
                     active
                       ? "text-blue-600 bg-blue-50/80"
                       : "text-slate-400 hover:text-slate-600"
