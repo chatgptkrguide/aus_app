@@ -178,10 +178,7 @@ export default function Home(): React.ReactElement {
               {/* CTA Button */}
               <Link
                 href={`/stage/${progress.currentStage}`}
-                className="mt-4 flex h-12 w-full items-center justify-center rounded-2xl bg-blue-500 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:bg-blue-600 hover:shadow-xl active:scale-95"
-                style={{
-                  animation: "cta-glow 2s ease-in-out infinite",
-                }}
+                className="mt-4 flex h-12 w-full items-center justify-center rounded-2xl bg-blue-500 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition-all hover:bg-blue-600 hover:shadow-xl active:scale-95 cta-glow"
               >
                 바로 시작하기 →
               </Link>
@@ -308,18 +305,6 @@ export default function Home(): React.ReactElement {
         <div className="h-8" />
       </main>
 
-      {/* CTA glow animation */}
-      <style jsx>{`
-        @keyframes cta-glow {
-          0%,
-          100% {
-            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
-          }
-          50% {
-            box-shadow: 0 4px 24px rgba(59, 130, 246, 0.5);
-          }
-        }
-      `}</style>
     </div>
   );
 }

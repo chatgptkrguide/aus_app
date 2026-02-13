@@ -31,7 +31,7 @@ export default function LevelBadge({
     LEVEL_COLORS[currentRank.level] ?? "from-slate-400 to-slate-500";
 
   return (
-    <div className="glass-card p-3 bounce-in">
+    <div className="glass-card p-3">
       {/* Top row: Rank info + Streak */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">

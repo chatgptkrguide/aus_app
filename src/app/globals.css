@@ -333,14 +333,20 @@ button, a, [role="button"] {
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
 .quest-feed::-webkit-scrollbar {
   display: none;
 }
 
-.quest-feed {
-  scrollbar-width: none;
+/* CTA button glow */
+@keyframes cta-glow {
+  0%, 100% { box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3); }
+  50% { box-shadow: 0 4px 24px rgba(59, 130, 246, 0.5); }
+}
+.cta-glow {
+  animation: cta-glow 2s ease-in-out infinite;
 }
 
 .quest-slide {

@@ -75,8 +75,8 @@ export default function QuestSlide({
       <RewardBurst show={showBurst} color={stageColor} />
 
       {/* Top area: stage info + progress dots */}
-      <div className="absolute top-0 left-0 right-0 pt-[env(safe-area-inset-top,0px)] px-6 pb-2">
-        <div className="pt-4">
+      <div className="absolute top-0 left-0 right-0 pt-[env(safe-area-inset-top,0px)] px-6 pb-2 z-20">
+        <div className="pt-14">
           <p className="text-xs text-gray-400 text-center font-medium tracking-wide">
             {stageTitle} &middot; {questIndex + 1}/{totalQuests}
           </p>
@@ -148,8 +148,8 @@ export default function QuestSlide({
       </div>
 
       {/* Bottom area: action button + hints */}
-      <div className="absolute bottom-0 left-0 right-0 pb-[env(safe-area-inset-bottom,0px)] px-6">
-        <div className="pb-8 w-full max-w-sm mx-auto">
+      <div className="absolute bottom-0 left-0 right-0 pb-[env(safe-area-inset-bottom,0px)] px-6 z-20">
+        <div className="pb-10 w-full max-w-sm mx-auto">
           {/* Action button */}
           <button
             onClick={handleComplete}

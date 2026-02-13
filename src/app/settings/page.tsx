@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Header from "@/components/Header";
 import ConfirmModal from "@/components/ConfirmModal";
 import { useProgress } from "@/hooks/useProgress";
@@ -105,14 +106,22 @@ export default function SettingsPage(): React.ReactElement {
               </span>
             </p>
             <p>Made with ❤️ for WHV dreamers</p>
-            <a
-              href="https://github.com/chatgptkrguide/aus_app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 transition-colors mt-2"
-            >
-              GitHub →
-            </a>
+            <div className="flex items-center gap-3 mt-2">
+              <a
+                href="https://github.com/chatgptkrguide/aus_app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 transition-colors"
+              >
+                GitHub →
+              </a>
+              <Link
+                href="/privacy"
+                className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-700 transition-colors"
+              >
+                개인정보처리방침
+              </Link>
+            </div>
           </div>
         </section>
 

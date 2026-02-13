@@ -15,13 +15,16 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/settings", label: "설정", emoji: "⚙️" },
 ];
 
-export default function BottomNav(): React.ReactElement {
+export default function BottomNav(): React.ReactElement | null {
   const pathname = usePathname();
 
   const isActive = (href: string): boolean => {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
+
+  // Hide on full-screen stage pages
+  if (pathname.startsWith("/stage/")) return null;
 
   return (
     <nav
