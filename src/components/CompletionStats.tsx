@@ -29,34 +29,39 @@ export default function CompletionStats({
 }: CompletionStatsProps): React.ReactNode {
   const days = getDaysSince(startedAt);
   const nextMilestone = getNextMilestone(completedCount);
-  const percentage = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
   return (
-    <div className="glass-card p-4 space-y-3">
-      <div className="flex items-center justify-between">
-        <span className="text-sm text-slate-500">준비 기간</span>
-        <span className="text-lg font-bold text-sky-700">D+{days}일째 준비 중</span>
+    <div className="glass-card p-4">
+      <div className="grid grid-cols-2 gap-3">
+        <div className="text-center">
+          <p className="text-xs text-slate-500">📅 준비 기간</p>
+          <p className="text-lg font-bold text-sky-700 mt-1">
+            {days === 0 ? "오늘 시작!" : `D+${days}일`}
+          </p>
+        </div>
+        <div className="text-center">
+          <p className="text-xs text-slate-500">✅ 완료 퀘스트</p>
+          <p className="text-lg font-bold text-emerald-600 mt-1">
+            {completedCount}/{totalCount}
+          </p>
+        </div>
       </div>
-
-      <div className="flex items-center justify-between">
-        <span className="text-sm text-slate-500">완료 퀘스트</span>
-        <span className="text-lg font-bold text-emerald-600">
-          {completedCount} / {totalCount} ({percentage}%)
-        </span>
-      </div>
-
       {nextMilestone !== null && (
-        <div className="flex items-center justify-between">
-          <span className="text-sm text-slate-500">다음 마일스톤</span>
-          <span className="text-sm font-medium text-amber-600">
-            {nextMilestone}개까지 {nextMilestone - completedCount}개 남음
-          </span>
+        <div className="mt-3 pt-3 border-t border-slate-100 text-center">
+          <p className="text-xs text-slate-500">
+            🎯 다음 마일스톤까지{" "}
+            <span className="font-bold text-amber-600">
+              {nextMilestone - completedCount}개
+            </span>{" "}
+            남음
+          </p>
         </div>
       )}
-
       {nextMilestone === null && (
-        <div className="text-center text-sm font-medium text-emerald-600">
-          모든 마일스톤을 달성했습니다!
+        <div className="mt-3 pt-3 border-t border-slate-100 text-center">
+          <p className="text-xs font-medium text-emerald-600">
+            🎉 모든 마일스톤을 달성했습니다!
+          </p>
         </div>
       )}
     </div>

@@ -20,9 +20,9 @@ export default function Header({
       {showBack && (
         <Link
           href="/"
-          className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm text-blue-600 hover:text-blue-800 bg-white/60 backdrop-blur-sm shadow-sm border border-white/40 transition-colors mb-3"
+          className="group inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm text-blue-600 hover:text-blue-800 bg-white/60 backdrop-blur-sm shadow-sm border border-white/40 transition-all mb-3"
         >
-          <span>&larr;</span>
+          <span className="transition-transform group-hover:-translate-x-0.5">&larr;</span>
           <span>홈</span>
         </Link>
       )}
