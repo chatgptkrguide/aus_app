@@ -17,6 +17,12 @@ export default function QuestCard({
 }: QuestCardProps): React.ReactElement {
   const handleClick = (): void => {
     if (disabled) return;
+
+    // Haptic feedback
+    if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+      navigator.vibrate(isCompleted ? 30 : [30, 50, 30]);
+    }
+
     onToggle(quest.id);
   };
 
@@ -24,7 +30,7 @@ export default function QuestCard({
     <div
       className={`glass-card p-4 transition-all duration-200 ${
         isCompleted
-          ? "bg-green-50/70 border-green-200/50"
+          ? "bg-green-50/70 border-green-200/50 quest-complete-burst"
           : "bg-white/70"
       } ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:shadow-md active:scale-[0.98]"}`}
       onClick={handleClick}
@@ -76,6 +82,12 @@ export default function QuestCard({
             >
               {quest.title}
             </h3>
+            {/* XP badge for incomplete quests */}
+            {!isCompleted && !disabled && (
+              <span className="xp-badge-pulse ml-auto shrink-0 text-[10px] font-bold bg-amber-100 text-amber-600 px-1.5 py-0.5 rounded-full">
+                +10 XP
+              </span>
+            )}
           </div>
           <p
             className={`text-sm mt-1 ${

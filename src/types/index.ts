@@ -20,3 +20,25 @@ export interface UserProgress {
   currentStage: number;
   startedAt: string;
 }
+
+export interface GameState {
+  xp: number;
+  level: number;
+  achievements: string[];
+  streak: number;
+  lastVisit: string;
+}
+
+export interface Rank {
+  level: number;
+  title: string;
+  emoji: string;
+  minXP: number;
+}
+
+export interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  emoji: string;
+}

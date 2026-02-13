@@ -1,20 +1,49 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { stages, getTotalQuestCount } from "@/data/quests";
 import { useProgress } from "@/hooks/useProgress";
+import { useGameSystem } from "@/hooks/useGameSystem";
 import { useDeparture } from "@/hooks/useDeparture";
 import CompletionStats from "@/components/CompletionStats";
 import AirplaneTakeoff from "@/components/AirplaneTakeoff";
+import LevelBadge from "@/components/LevelBadge";
+import XPBar from "@/components/XPBar";
+import AchievementPopup from "@/components/AchievementPopup";
+import { Achievement } from "@/types";
 
 export default function Home(): React.ReactElement {
   const [mounted, setMounted] = useState(false);
   const { progress, getStageProgress, getTotalProgress } = useProgress();
   const { daysUntilDeparture } = useDeparture();
+  const {
+    gameState,
+    currentRank,
+    nextRank,
+    xpToNextLevel,
+    xpProgress,
+    achievements,
+    unlockedAchievements,
+    checkAchievements,
+    streak,
+  } = useGameSystem();
   const totalProgress = getTotalProgress();
 
+  const [achievementPopup, setAchievementPopup] = useState<Achievement | null>(null);
+
   useEffect(() => setMounted(true), []);
+
+  // Sync achievements when page loads
+  useEffect(() => {
+    if (mounted && progress.completedQuests.length > 0) {
+      checkAchievements(progress.completedQuests);
+    }
+  }, [mounted, progress.completedQuests, checkAchievements]);
+
+  const handleAchievementDone = useCallback((): void => {
+    setAchievementPopup(null);
+  }, []);
 
   if (!mounted) return (
     <div className="min-h-screen px-4 py-8">
@@ -46,8 +75,20 @@ export default function Home(): React.ReactElement {
     return incomplete ?? null;
   })();
 
+  const getStageXP = (stageId: number): number => {
+    const stage = stages.find((s) => s.id === stageId);
+    if (!stage) return 0;
+    return stage.quests.length * 10;
+  };
+
   return (
     <div className="relative min-h-screen overflow-hidden px-4 py-8">
+      {/* Achievement popup */}
+      <AchievementPopup
+        achievement={achievementPopup}
+        onDone={handleAchievementDone}
+      />
+
       {/* Cloud decorations */}
       <span className="cloud-float-slow pointer-events-none absolute top-12 left-6 text-4xl opacity-60">
         ☁️
@@ -64,7 +105,7 @@ export default function Home(): React.ReactElement {
 
       <main className="relative z-10 mx-auto max-w-md">
         {/* Header */}
-        <header className="mb-8 text-center">
+        <header className="mb-6 text-center">
           <h1 className="text-3xl font-bold text-slate-800">
             호주 워홀 메이트
           </h1>
@@ -76,31 +117,33 @@ export default function Home(): React.ReactElement {
               ✈️ 출발까지 D-{daysUntilDeparture}
             </span>
           )}
-
-          {/* Progress bar with airplane */}
-          <div className="mt-6">
-            <div className="progress-track relative">
-              <div
-                className="progress-bar"
-                style={
-                  { "--progress-width": `${totalProgress}%` } as React.CSSProperties
-                }
-              />
-              <span
-                className="absolute top-1/2 -translate-y-1/2 text-lg transition-all duration-700 ease-out"
-                style={{ left: `${Math.min(Math.max(totalProgress, 5), 95)}%` }}
-              >
-                ✈️
-              </span>
-            </div>
-            <p className="mt-2 text-sm font-semibold text-blue-600">
-              {totalProgress}% 완료
-            </p>
-          </div>
         </header>
 
+        {/* Level Badge */}
+        <section className="mb-4">
+          <LevelBadge
+            currentRank={currentRank}
+            nextRank={nextRank}
+            xpProgress={xpProgress}
+            xpToNextLevel={xpToNextLevel}
+            totalXP={gameState.xp}
+            streak={streak}
+          />
+        </section>
+
+        {/* XP-powered progress bar */}
+        <section>
+          <XPBar
+            currentXP={gameState.xp}
+            currentRank={currentRank}
+            nextRank={nextRank}
+            xpProgress={xpProgress}
+            totalProgress={totalProgress}
+          />
+        </section>
+
         {/* Stage map */}
-        <section className="flex flex-col items-center gap-0">
+        <section className="mt-6 flex flex-col items-center gap-0">
           {stages.map((stage, index) => {
             const unlocked = isStageUnlocked(stage.id);
             const completed = isStageCompleted(stage.id);
@@ -110,6 +153,7 @@ export default function Home(): React.ReactElement {
             const completedCount = stage.quests.filter((q) =>
               progress.completedQuests.includes(q.id)
             ).length;
+            const stageXP = getStageXP(stage.id);
 
             return (
               <div key={stage.id} className="flex w-full flex-col items-center">
@@ -142,6 +186,12 @@ export default function Home(): React.ReactElement {
                               {isCurrent && (
                                 <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-semibold text-blue-600">
                                   진행 중
+                                </span>
+                              )}
+                              {/* XP available badge */}
+                              {!completed && (
+                                <span className="ml-auto text-[10px] font-bold text-amber-500 bg-amber-50 px-2 py-0.5 rounded-full">
+                                  🏆 {stageXP} XP
                                 </span>
                               )}
                             </div>
@@ -217,12 +267,17 @@ export default function Home(): React.ReactElement {
           </section>
         )}
 
-        {/* Completion Stats */}
+        {/* Completion Stats with game data */}
         <section className="mt-8">
           <CompletionStats
             startedAt={progress.startedAt}
             completedCount={progress.completedQuests.length}
             totalCount={getTotalQuestCount()}
+            currentRank={currentRank}
+            totalXP={gameState.xp}
+            streak={streak}
+            unlockedAchievements={unlockedAchievements}
+            totalAchievements={achievements.length}
           />
         </section>
 
