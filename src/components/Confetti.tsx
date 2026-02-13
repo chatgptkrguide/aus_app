@@ -13,20 +13,23 @@ interface Particle {
   size: number;
   duration: number;
   delay: number;
-  shape: 'square' | 'circle';
+  shape: 'square' | 'circle' | 'star';
 }
 
-const COLORS = ['#ef4444', '#3b82f6', '#eab308', '#22c55e', '#f97316'];
+const COLORS = [
+  '#ef4444', '#3b82f6', '#eab308', '#22c55e', '#f97316',
+  '#8b5cf6', '#ec4899', '#14b8a6', '#f59e0b', '#6366f1',
+];
 
 function generateParticles(): Particle[] {
-  return Array.from({ length: 25 }, (_, i) => ({
+  return Array.from({ length: 40 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
     color: COLORS[Math.floor(Math.random() * COLORS.length)],
-    size: Math.random() * 8 + 4,
+    size: Math.random() * 10 + 6,
     duration: Math.random() * 2 + 2,
-    delay: Math.random() * 0.5,
-    shape: Math.random() > 0.5 ? 'square' : 'circle',
+    delay: Math.random() * 0.8,
+    shape: i % 3 === 0 ? 'star' : i % 3 === 1 ? 'circle' : 'square',
   }));
 }
 
@@ -40,7 +43,7 @@ export default function Confetti({ show }: ConfettiProps): React.ReactNode {
       setVisible(true);
       const timer = setTimeout(() => {
         setVisible(false);
-      }, 3000);
+      }, 3500);
       return () => clearTimeout(timer);
     }
     setVisible(false);
@@ -53,13 +56,13 @@ export default function Confetti({ show }: ConfettiProps): React.ReactNode {
       {particles.map((p) => (
         <div
           key={p.id}
-          className="confetti-piece absolute top-0"
+          className={`confetti-piece absolute top-0 ${p.shape === 'star' ? 'star-shape' : ''}`}
           style={{
             left: `${p.left}%`,
             width: p.size,
             height: p.size,
             backgroundColor: p.color,
-            borderRadius: p.shape === 'circle' ? '50%' : '2px',
+            borderRadius: p.shape === 'circle' ? '50%' : p.shape === 'square' ? '2px' : '0',
             '--fall-duration': `${p.duration}s`,
             '--fall-delay': `${p.delay}s`,
           } as React.CSSProperties}
