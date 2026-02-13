@@ -16,7 +16,17 @@ export default function Home(): React.ReactElement {
 
   useEffect(() => setMounted(true), []);
 
-  if (!mounted) return <div className="min-h-screen" />;
+  if (!mounted) return (
+    <div className="min-h-screen px-4 py-8">
+      <div className="mx-auto max-w-md space-y-4">
+        <div className="h-24 rounded-2xl bg-slate-200/50 animate-pulse" />
+        <div className="h-32 rounded-2xl bg-slate-200/50 animate-pulse" />
+        <div className="h-32 rounded-2xl bg-slate-200/50 animate-pulse" />
+        <div className="h-32 rounded-2xl bg-slate-200/50 animate-pulse" />
+        <div className="h-32 rounded-2xl bg-slate-200/50 animate-pulse" />
+      </div>
+    </div>
+  );
 
   const isStageUnlocked = (stageId: number): boolean => {
     if (stageId === 1) return true;
@@ -112,7 +122,7 @@ export default function Home(): React.ReactElement {
                 {unlocked ? (
                   <Link href={`/stage/${stage.id}`} className="block w-full">
                     <div
-                      className={`glass-card w-full p-5 transition-all ${
+                      className={`glass-card w-full p-5 transition-all hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] ${
                         isCurrent
                           ? "ring-2 ring-blue-400 ring-offset-2"
                           : completed
@@ -123,20 +133,19 @@ export default function Home(): React.ReactElement {
                       <div className="flex items-center gap-3">
                         <span className="text-3xl">{stage.emoji}</span>
                         <div className="flex-1">
-                          <div className="flex items-center gap-2">
-                            <h2 className="text-lg font-bold text-slate-800">
-                              Stage {stage.id}: {stage.title}
-                            </h2>
-                            {isCurrent && (
-                              <span className="text-xs font-semibold text-blue-500">
-                                현재 단계 &rarr;
-                              </span>
-                            )}
-                            {completed && (
-                              <span className="check-animate text-green-500">
-                                ✅
-                              </span>
-                            )}
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <h2 className="text-base font-bold text-slate-800">
+                                Stage {stage.id}
+                              </h2>
+                              {completed && <span className="check-animate text-green-500">✅</span>}
+                              {isCurrent && (
+                                <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-semibold text-blue-600">
+                                  진행 중
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-sm font-medium text-slate-700 mt-0.5">{stage.title}</p>
                           </div>
                           <p className="mt-1 text-xs text-slate-500">
                             {completedCount}/{stage.quests.length} 퀘스트 완료
@@ -163,7 +172,10 @@ export default function Home(): React.ReactElement {
                 ) : (
                   <div className="glass-card w-full cursor-not-allowed p-5 opacity-50 grayscale">
                     <div className="flex items-center gap-3">
-                      <span className="text-3xl">🔒</span>
+                      <span className="relative text-3xl">
+                        <span className="opacity-30">{stage.emoji}</span>
+                        <span className="absolute -bottom-1 -right-1 text-sm">🔒</span>
+                      </span>
                       <div className="flex-1">
                         <h2 className="text-lg font-bold text-slate-400">
                           Stage {stage.id}: {stage.title}

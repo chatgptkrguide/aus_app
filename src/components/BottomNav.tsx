@@ -29,28 +29,23 @@ export default function BottomNav(): React.ReactElement {
       style={{ paddingBottom: "env(safe-area-inset-bottom, 8px)" }}
     >
       <div className="glass-card mx-auto w-full max-w-md rounded-t-2xl rounded-b-none border-b-0">
-        <ul className="flex items-center justify-around py-2">
+        <ul className="flex items-center justify-around py-2.5">
           {NAV_ITEMS.map((item) => {
             const active = isActive(item.href);
             return (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={`flex flex-col items-center gap-0.5 px-4 py-1 transition-colors ${
+                  className={`flex flex-col items-center gap-0.5 px-5 py-1.5 rounded-xl transition-all ${
                     active
-                      ? "text-blue-600"
-                      : "text-slate-500 hover:text-slate-700"
+                      ? "text-blue-600 bg-blue-50/80"
+                      : "text-slate-400 hover:text-slate-600"
                   }`}
                 >
-                  <span className="relative text-xl">
-                    {active && (
-                      <span className="absolute -top-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-blue-500" />
-                    )}
-                    {item.emoji}
-                  </span>
+                  <span className="text-xl">{item.emoji}</span>
                   <span
-                    className={`text-xs font-medium ${
-                      active ? "font-semibold" : ""
+                    className={`text-[10px] ${
+                      active ? "font-bold" : "font-medium"
                     }`}
                   >
                     {item.label}

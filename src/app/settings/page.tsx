@@ -27,7 +27,16 @@ export default function SettingsPage(): React.ReactElement {
     setShowResetModal(false);
   };
 
-  if (!mounted) return <div className="min-h-screen" />;
+  if (!mounted) return (
+    <div className="min-h-screen px-4 py-8">
+      <div className="mx-auto max-w-md space-y-4">
+        <div className="h-8 w-24 rounded-full bg-slate-200/50 animate-pulse" />
+        <div className="h-40 rounded-2xl bg-slate-200/50 animate-pulse" />
+        <div className="h-24 rounded-2xl bg-slate-200/50 animate-pulse" />
+        <div className="h-24 rounded-2xl bg-slate-200/50 animate-pulse" />
+      </div>
+    </div>
+  );
 
   return (
     <div className="relative min-h-screen px-4 py-8">

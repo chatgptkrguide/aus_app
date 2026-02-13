@@ -26,7 +26,7 @@ export default function QuestCard({
         isCompleted
           ? "bg-green-50/70 border-green-200/50"
           : "bg-white/70"
-      } ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:shadow-md"}`}
+      } ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:shadow-md active:scale-[0.98]"}`}
       onClick={handleClick}
       role="button"
       tabIndex={disabled ? -1 : 0}
@@ -43,7 +43,7 @@ export default function QuestCard({
           <div
             className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
               isCompleted
-                ? "bg-green-500 border-green-500"
+                ? "bg-green-500 border-green-500 shadow-sm shadow-green-200"
                 : "border-gray-300 bg-white"
             }`}
           >
@@ -89,10 +89,10 @@ export default function QuestCard({
               href={quest.guideUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block text-sm text-blue-500 hover:text-blue-700 mt-2 transition-colors"
+              className="inline-flex items-center gap-1 mt-2 px-3 py-1 rounded-full bg-blue-50 text-xs font-medium text-blue-600 hover:bg-blue-100 transition-colors"
               onClick={(e) => e.stopPropagation()}
             >
-              가이드 보기 &rarr;
+              📎 가이드 보기
             </a>
           )}
         </div>

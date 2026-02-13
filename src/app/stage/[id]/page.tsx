@@ -84,10 +84,12 @@ export default function StagePage(): React.ReactElement {
   };
 
   return (
-    <div className="min-h-screen p-4 pb-20">
+    <div className="relative min-h-screen overflow-hidden px-4 py-8 pb-24">
+      <span className="cloud-float-slow pointer-events-none absolute top-12 left-6 text-4xl opacity-60">☁️</span>
+      <span className="cloud-float pointer-events-none absolute top-24 right-8 text-3xl opacity-50">☁️</span>
       <XPPopup show={showXP} xp={10} />
       <Confetti show={showConfetti} />
-      <div className="max-w-md mx-auto">
+      <div className="relative z-10 max-w-md mx-auto">
         <Header
           title={`${stage.emoji} ${stage.title}`}
           subtitle={stage.description}
