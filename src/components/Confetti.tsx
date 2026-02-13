@@ -33,7 +33,7 @@ function generateParticles(): Particle[] {
   }));
 }
 
-export default function Confetti({ show }: ConfettiProps): React.ReactNode {
+export default function Confetti({ show }: ConfettiProps): React.ReactElement | null {
   const [visible, setVisible] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
 

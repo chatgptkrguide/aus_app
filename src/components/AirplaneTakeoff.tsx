@@ -22,7 +22,7 @@ function generateClouds(): Cloud[] {
   }));
 }
 
-export default function AirplaneTakeoff({ show }: AirplaneTakeoffProps): React.ReactNode {
+export default function AirplaneTakeoff({ show }: AirplaneTakeoffProps): React.ReactElement | null {
   const [visible, setVisible] = useState(false);
   const [clouds] = useState<Cloud[]>(generateClouds);
 

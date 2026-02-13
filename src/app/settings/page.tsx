@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import ConfirmModal from "@/components/ConfirmModal";
 import { useProgress } from "@/hooks/useProgress";
+import { useGameSystem } from "@/hooks/useGameSystem";
 import { useDeparture } from "@/hooks/useDeparture";
 
 function getDdayText(days: number | null): string {
@@ -15,6 +16,7 @@ function getDdayText(days: number | null): string {
 
 export default function SettingsPage(): React.ReactElement {
   const { resetProgress } = useProgress();
+  const { resetGameState } = useGameSystem();
   const { departureDate, setDepartureDate, daysUntilDeparture } =
     useDeparture();
   const [showResetModal, setShowResetModal] = useState(false);
@@ -24,6 +26,7 @@ export default function SettingsPage(): React.ReactElement {
 
   const handleResetConfirm = (): void => {
     resetProgress();
+    resetGameState();
     setShowResetModal(false);
   };
 

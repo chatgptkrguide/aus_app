@@ -15,15 +15,20 @@ export default function AchievementPopup({
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (achievement) {
-      setVisible(true);
-      const timer = setTimeout(() => {
-        setVisible(false);
-        setTimeout(() => onDone(), 400);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-    return undefined;
+    if (!achievement) return;
+
+    setVisible(true);
+    const hideTimer = setTimeout(() => {
+      setVisible(false);
+    }, 3000);
+    const doneTimer = setTimeout(() => {
+      onDone();
+    }, 3400);
+
+    return () => {
+      clearTimeout(hideTimer);
+      clearTimeout(doneTimer);
+    };
   }, [achievement, onDone]);
 
   if (!achievement) return null;

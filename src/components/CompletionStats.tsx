@@ -8,7 +8,7 @@ interface CompletionStatsProps {
   totalAchievementCount?: number;
 }
 
-const MILESTONES = [5, 10, 15, 19];
+const MILESTONES = [5, 10, 15];
 
 function getDaysSince(dateString: string): number {
   const start = new Date(dateString);
