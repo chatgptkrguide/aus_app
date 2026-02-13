@@ -58,6 +58,7 @@ export default function SettingsPage(): React.ReactElement {
           </h2>
           <input
             type="date"
+            aria-label="출발 예정일 선택"
             value={departureDate ?? ""}
             onChange={(e) => setDepartureDate(e.target.value)}
             className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white/80 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 mb-3"
@@ -80,6 +81,7 @@ export default function SettingsPage(): React.ReactElement {
           </h2>
           <button
             type="button"
+            aria-label="진행률 초기화"
             onClick={() => setShowResetModal(true)}
             className="w-full px-4 py-2.5 rounded-xl text-sm font-medium bg-red-500 hover:bg-red-600 text-white transition-colors"
           >

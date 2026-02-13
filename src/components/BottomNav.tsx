@@ -25,6 +25,7 @@ export default function BottomNav(): React.ReactElement {
 
   return (
     <nav
+      aria-label="메인 내비게이션"
       className="fixed bottom-0 left-0 right-0 z-50 flex justify-center"
       style={{ paddingBottom: "env(safe-area-inset-bottom, 8px)" }}
     >
@@ -36,6 +37,7 @@ export default function BottomNav(): React.ReactElement {
               <li key={item.href}>
                 <Link
                   href={item.href}
+                  aria-current={active ? "page" : undefined}
                   className={`flex flex-col items-center gap-0.5 px-5 py-1.5 rounded-xl transition-all ${
                     active
                       ? "text-blue-600 bg-blue-50/80"

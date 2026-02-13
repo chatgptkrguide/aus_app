@@ -143,6 +143,8 @@ function TipAccordion({ tip }: { tip: TipItem }): React.ReactElement {
       type="button"
       onClick={() => setIsOpen(!isOpen)}
       className="w-full text-left"
+      aria-expanded={isOpen}
+      aria-controls={`tip-detail-${tip.id}`}
     >
       <div className="flex items-start gap-2 py-2">
         <span className={`mt-0.5 text-xs transition-transform duration-200 ${isOpen ? "rotate-90" : ""}`}>
@@ -151,7 +153,10 @@ function TipAccordion({ tip }: { tip: TipItem }): React.ReactElement {
         <div className="flex-1">
           <p className="text-sm font-medium text-slate-700">{tip.text}</p>
           {isOpen && tip.detail && (
-            <p className="mt-2 ml-1 pl-3 border-l-2 border-blue-200 text-sm leading-relaxed text-slate-500">
+            <p
+              id={`tip-detail-${tip.id}`}
+              className="mt-2 ml-1 pl-3 border-l-2 border-blue-200 text-sm leading-relaxed text-slate-500"
+            >
               {tip.detail}
             </p>
           )}

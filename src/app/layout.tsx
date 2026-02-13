@@ -20,6 +20,24 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: "워홀메이트",
   },
+  openGraph: {
+    title: "호주 워홀 메이트",
+    description:
+      "게임처럼 재미있게! 호주 워킹홀리데이 비자 신청부터 출발까지 단계별 가이드",
+    url: "https://ausapp-tau.vercel.app",
+    siteName: "호주 워홀 메이트",
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "호주 워홀 메이트",
+    description:
+      "게임처럼 재미있게! 호주 워킹홀리데이 비자 신청부터 출발까지 단계별 가이드",
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+  },
 };
 
 export const viewport: Viewport = {
